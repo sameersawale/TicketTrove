@@ -77,4 +77,13 @@ public class UserController {
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return user;
     }
+
+    @GetMapping("/get/id/{id}")
+    public UserResponseDto getUser(@PathVariable("id") int id){
+        try {
+            return userService.getUser(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
