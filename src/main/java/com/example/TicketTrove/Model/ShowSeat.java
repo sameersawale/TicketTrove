@@ -35,5 +35,7 @@ public class ShowSeat {
     @JoinColumn(name = "screen_id")
     private Screen screen;
 
+
+
 }
 

@@ -37,4 +37,5 @@ public class Movie {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Screen> screenList=new ArrayList<>();
 
+
 }

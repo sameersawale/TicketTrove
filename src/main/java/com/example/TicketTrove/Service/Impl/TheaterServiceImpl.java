@@ -3,6 +3,8 @@ package com.example.TicketTrove.Service.Impl;
 import com.example.TicketTrove.DTO.RequestDTO.TheaterDto;
 import com.example.TicketTrove.DTO.ResponseDTO.TheaterResponseDto;
 import com.example.TicketTrove.Enum.SeatType;
+import com.example.TicketTrove.Model.Movie;
+import com.example.TicketTrove.Model.Screen;
 import com.example.TicketTrove.Model.Theater;
 import com.example.TicketTrove.Model.TheaterSeat;
 import com.example.TicketTrove.Repository.TheaterRepository;
@@ -72,6 +74,15 @@ public class TheaterServiceImpl implements TheaterService {
     public String deleteTheater(int id) throws Exception {
         theaterRepository.deleteById(id);
         return "Theater deleted successfully.....";
+    }
+
+    @Override
+    public List<Screen> getAllShowsOfTheater(String name) throws Exception {
+        Theater theater=theaterRepository.findByName(name).orElseThrow(()->
+                new RuntimeException("please check theater name!!"));
+        List<Screen> screenList=theater.getScreenList();
+        return screenList;
+
     }
 
     private List<TheaterSeat> createTheaterSeats(TheaterDto theaterDto, Theater theater){

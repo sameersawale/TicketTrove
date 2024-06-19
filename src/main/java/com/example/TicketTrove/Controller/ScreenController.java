@@ -5,6 +5,7 @@ import com.example.TicketTrove.DTO.ResponseDTO.ScreenResponseDto;
 import com.example.TicketTrove.Model.Screen;
 import com.example.TicketTrove.Service.ScreenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class ScreenController {
     ScreenService screenService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public ScreenResponseDto addShow(@RequestBody ScreenDto screenDto){
         try {
             return screenService.addScreen(screenDto);
@@ -33,6 +35,7 @@ public class ScreenController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String delete(@PathVariable("id") int id){
         try {
             return screenService.deleteById(id);

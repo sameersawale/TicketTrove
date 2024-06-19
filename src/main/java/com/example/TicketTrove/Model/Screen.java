@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,8 +26,7 @@ public class Screen {
     @Temporal(TemporalType.DATE)
     private Date showDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date showTime;
+    private LocalTime showTime;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "screen", cascade = CascadeType.ALL)
     private List<ShowSeat> showSeatList=new ArrayList<>();
@@ -38,5 +38,8 @@ public class Screen {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     private Movie movie;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "screen", cascade = CascadeType.ALL)
+    private List<Ticket>ticketList=new ArrayList<>();
 
 }

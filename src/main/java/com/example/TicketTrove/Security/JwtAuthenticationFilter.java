@@ -1,5 +1,6 @@
 package com.example.TicketTrove.Security;
 
+import com.example.TicketTrove.Security.Service.UserDetailsServiceImpl;
 import com.example.TicketTrove.Service.Impl.UserServiceImpl;
 import com.example.TicketTrove.Service.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -24,7 +25,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    UserServiceImpl userService;
+    UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     JwtHelper jwtHelper;
@@ -61,7 +62,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null){
             //fetch user detail from username
-            UserDetails userDetails = this.userService.loadUserByUsername(username);
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             Boolean validateToken = this.jwtHelper.validateToken(token, userDetails);
             if (validateToken) {
 

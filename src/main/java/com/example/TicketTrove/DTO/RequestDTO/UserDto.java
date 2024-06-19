@@ -1,7 +1,7 @@
 package com.example.TicketTrove.DTO.RequestDTO;
 
-import com.example.TicketTrove.Model.Role;
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.Email;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,6 +16,7 @@ public class UserDto {
     private String lastName;
 
     @Column(unique = true, nullable = false)
+    @Email
     private String email;
 
     private String mobileNo;

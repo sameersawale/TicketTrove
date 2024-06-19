@@ -1,8 +1,11 @@
 package com.example.TicketTrove.DTO.RequestDTO;
 
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -11,7 +14,7 @@ public class ScreenDto {
 
     private Date showDate;
 
-    private Date showTime;
+    private LocalTime showTime;
 
     private int theaterId;
 

@@ -4,6 +4,7 @@ import com.example.TicketTrove.DTO.RequestDTO.MovieDto;
 import com.example.TicketTrove.DTO.ResponseDTO.MovieResponseDto;
 import com.example.TicketTrove.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,6 +15,7 @@ public class MovieController {
     MovieService movieService;
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public MovieResponseDto addMovie(@RequestBody MovieDto movieDto){
         try {
             return movieService.addMovie(movieDto);
@@ -32,11 +34,13 @@ public class MovieController {
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public MovieResponseDto updateMovie(@PathVariable("id") int id, @RequestBody MovieDto movieDto) throws Exception {
         return movieService.updateMovie(id, movieDto);
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteMovie(@PathVariable("id") int id){
         try {
             return movieService.deleteMovie(id);

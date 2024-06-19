@@ -7,7 +7,7 @@ public interface UserService {
 
     public UserResponseDto addUser(UserDto userDto) throws Exception;
 
-    public UserResponseDto getUser(int id) throws Exception;
+    public UserResponseDto getUser() throws Exception;
 
     public UserResponseDto updateUser(int id, UserDto userDto) throws Exception;
 
