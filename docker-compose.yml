@@ -5,7 +5,7 @@ services:
   mysql:
     image: mysql:8.0
     container_name: mysql-tickettrove
-    #    restart: always
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: tickettrove
@@ -15,8 +15,10 @@ services:
       - mysql_data:/var/lib/mysql
 
   app:
-    build: .
+    # Changed from build: . to your Docker Hub image
+    image: sameer51/ticket-trove-app:latest
     container_name: ticket-trove-db
+    restart: always
     ports:
       - "8080:8080"
     depends_on:
@@ -25,6 +27,18 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/tickettrove
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_REGISTRY_AUTH_URL=https://index.docker.io/v1/
+      - WATCHTOWER_REGISTRY_AUTH_USER=sameer51
+      - WATCHTOWER_REGISTRY_AUTH_PASSWORD=dckr_pat_h3MdRjehhN6pnGNMla_ELtec9Ng
+    command: --interval 30 --cleanup
 
 volumes:
   mysql_data:
