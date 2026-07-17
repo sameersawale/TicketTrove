@@ -35,9 +35,9 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - WATCHTOWER_REGISTRY_AUTH_URL=https://index.docker.io/v1/
-      - WATCHTOWER_REGISTRY_AUTH_USER=sameer51
-      - WATCHTOWER_REGISTRY_AUTH_PASSWORD=dckr_pat_h3MdRjehhN6pnGNMla_ELtec9Ng
+      - WATCHTOWER_REGISTRY_AUTH_URL=${{ secrets.DOCKER_URL }}
+      - WATCHTOWER_REGISTRY_AUTH_USER=${{ secrets.DOCKER_USERNAME }}
+      - WATCHTOWER_REGISTRY_AUTH_PASSWORD=${{ secrets.DOCKER_PASSWORD }}
     command: --interval 30 --cleanup
 
 volumes:
